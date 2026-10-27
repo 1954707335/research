@@ -1,0 +1,63 @@
+variable,storage_type,definition,source_or_derivation,role,missing_rule
+season,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+game_id,int64,NBA game identifier,PBP gameId,fixed effect and cluster,exclude if missing
+action_number,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+period,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+clock_seconds,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+team_id,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+player_id,int64,NBA player identifier,PBP personId,cluster,exclude if missing
+player_id_x_season,int64,Player-by-season identifier,PBP player_id and season,fixed effect,exclude if component missing
+pre_score_home,int64,Home score immediately before current shot,reconstructed PBP score,state,exclude if missing
+pre_score_away,int64,Away score immediately before current shot,reconstructed PBP score,state,exclude if missing
+shot_distance_feet,int64,Current shot distance in feet,shotdetail.SHOT_DISTANCE,outcome,exclude if missing
+loc_x,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+loc_y,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+is_home_offense,int64,Shooting team is home team,PBP location,control,exclude from model if missing
+shot_made,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+previous_personal_action_number,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+previous_personal_shot_distance_feet,int64,Distance of player's prior same-period FGA,shotdetail.SHOT_DISTANCE,control,main sample excludes if missing
+previous_personal_miss,int64,Same player's prior same-period FGA was missed,PBP shotResult,predictor,exclude if no same-period personal lag
+previous_personal_critical,int64,Prior personal FGA met primary criticality definition,prior reconstructed state,robustness moderator,exclude if prior state missing
+stable_critical_status,bool,Current and prior personal shot share critical status,derived,sensitivity sample,exclude if no prior personal FGA
+personal_interval_seconds,int64,Game-clock seconds since player's prior same-period FGA,derived,control,exclude if no personal lag
+same_stint,bool,No substitution-out event for player between personal FGAs,PBP substitution events,sensitivity sample,exclude if no personal lag
+no_timeout_between_personal_shots,bool,No timeout event between personal FGAs,PBP timeout events,sensitivity sample,exclude if no personal lag
+offensive_rebound_continuation,bool,Current shot immediately follows same-team miss and first rebound by same team,PBP interval events,main exclusion,treat missing as false only after interval construction
+putback_within_one_second,bool,Offensive-rebound continuation within one second of rebound,PBP interval events,sensitivity exclusion,treat missing as false only after interval construction
+heave_proxy,bool,Periods 1-3 with <=3 seconds and distance >=36 feet,period clock distance,main exclusion,exclude if distance or clock missing
+home_pre_shot_margin,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+offense_signed_pre_shot_margin,int64,Pre-shot margin from shooting team's perspective,pre_score_home pre_score_away location,control,exclude if missing
+absolute_pre_shot_margin,int64,Absolute pre-shot score margin,pre_score_home pre_score_away,control,exclude if missing
+remaining_period_seconds,int64,Seconds remaining in current period,PBP clock,control,exclude if missing
+remaining_game_seconds,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+critical,int64,Period 4 and <=300 seconds and absolute pre-shot margin <=5,PBP period clock reconstructed score,moderator,exclude if state missing
+post_miss_x_critical,int64,Product of previous_personal_miss and critical,derived,interaction,exclude if component missing
+continuous_criticality,float64,exp(-remaining game seconds/300) times exp(-absolute margin/5),derived,robustness moderator,missing in overtime
+post_miss_x_continuous_criticality,float64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+is_three_point_attempt,int64,Current shot is a three-point attempt,shotdetail.SHOT_TYPE,outcome,exclude for secondary model if missing
+previous_team_miss,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+post_team_miss_x_critical,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+previous_global_miss,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+previous_global_relation,str,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+global_rel_teammate,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+global_rel_opponent,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+global_miss_x_teammate,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+global_miss_x_opponent,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+global_miss_x_critical,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+teammate_x_critical,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+opponent_x_critical,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+global_miss_x_teammate_x_critical,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+global_miss_x_opponent_x_critical,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+remaining_period_seconds_spline_60,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+remaining_period_seconds_spline_120,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+remaining_period_seconds_spline_300,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+remaining_period_seconds_spline_480,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+absolute_pre_shot_margin_spline_3,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+absolute_pre_shot_margin_spline_5,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+absolute_pre_shot_margin_spline_10,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+absolute_pre_shot_margin_spline_20,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+personal_interval_seconds_spline_30,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+personal_interval_seconds_spline_60,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+personal_interval_seconds_spline_120,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+personal_interval_seconds_spline_300,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
+home_win,int64,Derived analysis field; see source code.,derived,"identifier, state, or secondary-analysis field",See Methods and sample-construction code.
