@@ -9,7 +9,7 @@ Public data-and-code deposit for **Does game criticality moderate post-miss shot
 - `derived_data_manifest.csv`: row counts, file sizes, and SHA-256 hashes.
 - `nba_post_miss_code_results_v2_portable.zip`: portable code-and-results archive. This corrected archive supersedes the earlier package while preserving the original freeze manifest.
 
-SHA-256 (`nba_post_miss_code_results_v2_portable.zip`): `21cb14b7357775ec3becc93ca1a2da89b53474e20916099b1b3c574cc7643c78`.
+SHA-256 (`nba_post_miss_code_results_v2_portable.zip`): `f8e15b667ffaeeb8c06d3887a7f49d090cbdf0193440b241c21be42f558f12f1`.
 
 ## Reproduce the analysis
 
